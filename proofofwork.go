@@ -22,16 +22,18 @@ const targetBits = 24
 //除非挖矿系数随着时间推移，挖矿难度系数不断增加
 type ProofOfWork struct {
 	block  *Block   //指向区块的指针
-	target *big.Int //必要条件
+	target *big.Int //必要条件：哈希后的数据转为大整数后，小于target
 }
 
 // NewProofOfWork 初始化创建一个POW的函数，以block指针为参数（将修改该block）
+//主要目的是确定target
 func NewProofOfWork(b *Block) *ProofOfWork {
 	//初始化target为1（256位），其值如下（16进制）：
 	//0000000000000000000000000000000000000000000000000000000000000001
 	target := big.NewInt(1)
 
-	//结论：左移256-targetBits位后的target,按照256位宽度补齐左侧的0，则左侧包含23个0，而第24位为1，所以只要区块的哈希转为大整数后的结果小于target，那么该结果一定包含至少24个前置0
+	//结论：左移256-targetBits位后的target,按照256位宽度补齐左侧的0，则左侧包含23个0，而第24位为1，
+	//所以只要区块的哈希转为大整数后的结果小于target，那么该结果一定包含至少24个前置0
 	//下面是计算分析
 	//左移运算，低位补0，高位丢弃
 	//左移256-targetBits的结果（16进制），即为必要条件target：
