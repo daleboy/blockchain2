@@ -86,7 +86,6 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 		//是为节约内存开销，因为有可能要计算非常多的次数，如果每次都是拷贝数组（数组是值类型），
 		//那么这个算法的内存开销可能很大
 		hashInt.SetBytes(hash[:])
-
 		if hashInt.Cmp(pow.target) == -1 {
 			//hashInt<pow.target，则挖矿成功，返回区块和有效计数器，不必继续挖
 			break

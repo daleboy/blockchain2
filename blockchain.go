@@ -5,7 +5,7 @@ type Blockchain struct {
 	Blocks []*Block
 }
 
-//AddBlock 挖出区块并将新区块加入到区块链中
+//AddBlock 挖出普通区块并将新区块加入到区块链中
 func (bc *Blockchain) AddBlock(data string) {
 	prevBlock := bc.Blocks[len(bc.Blocks)-1]
 	newBlock := NewBlock(data, prevBlock.Hash) //挖出区块

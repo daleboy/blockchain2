@@ -27,7 +27,7 @@ func NewBlock(data string, prevBlockHash []byte) *Block {
 	return block
 }
 
-//NewGenesisBlock 创建创始区块。创建创始区块也需要挖矿。
+//NewGenesisBlock 创建创始区块。注意，创建创始区块也需要挖矿。
 func NewGenesisBlock() *Block {
 	return NewBlock("创始区块", []byte{})
 }
